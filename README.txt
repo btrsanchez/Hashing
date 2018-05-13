@@ -1,3 +1,6 @@
--Para generar el diccionario y el texto: make ficheros
--Para generar el programa principal: make main
+-Para generar el diccionario y el texto: 
+	-make ficheros
+	-./generadorfichero
+-Para generar el programa principal: 
+	-make main
 	-Pueden aparecer warnings al compilar Bloom.c
