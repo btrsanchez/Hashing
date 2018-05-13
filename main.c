@@ -28,9 +28,9 @@ void ReadTxt() {
 }
 
 void Algorisme(string opcio) {
-  time_t timer;
+  //time_t timer;
   double talg;
-  timer = clock();
+  //timer = clock();
 	if (opcio=="Bloom") {
 		unsigned int n, m, k;
 		BV bits;
@@ -42,13 +42,13 @@ void Algorisme(string opcio) {
 		BloomFilter(bits,dic,txt,n,m,k);
 	}
 	if (opcio=="HashOpen"){
-    cout<<"Choose Hash Table size, minimum is "<<dic.size()<<" (dic.txt size)"<<endl;
+    cout<<"Elige tamaño de la tabla Hash, el mínimo es "<<dic.size()<<" (tamaño dic.txt)"<<endl;
     int Hs;
     cin>>Hs;
 		if (Hs>= dic.size()) busca(dic,txt,Hs);
 	}
 	if (opcio=="HashSeparate"){
-    cout<<"Choose Hash Table size, minimum is "<<dic.size()<<" (dic.txt size)"<<endl;
+    cout<<"Elige tamaño de la tabla Hash, el mínimo es "<<dic.size()<<" (tamaño dic.txt)"<<endl;
     int Hs;
     cin>>Hs;
 		if (Hs>= dic.size()) buscaH(dic,txt,Hs);
@@ -56,15 +56,15 @@ void Algorisme(string opcio) {
 	if (opcio=="Binary"){
 		Binaria(dic,txt);
 	}
-  talg = double(clock() - timer) / CLOCKS_PER_SEC;
-  cout << "Algorithm execution time: " << talg << " seconds\n";
+  //talg = double(clock() - timer) / CLOCKS_PER_SEC;
+  //cout << "Algorithm execution time: " << talg << " seconds\n";
 }
 
 int main(){
 	ReadDic();
 	ReadTxt();
 	string opcio;
-	cout << "Choose algorithm: Bloom/HashOpen/HashSeparate/Binary/All\n";
+	cout << "Elige algoritmo: Bloom/HashOpen/HashSeparate/Binary/All\n";
 	cin >> opcio;
   if (opcio=="All") {
     cout << "Bloom\n";
