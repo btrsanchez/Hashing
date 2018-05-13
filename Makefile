@@ -1,5 +1,8 @@
 all: main
 
+fichero: generadorfichero.c
+	g++ -o generadorfichero generadorfichero.c
+
 Bloom.o: lib/Bloom/Bloom.h lib/Bloom/Bloom.c
 	g++ -c lib/Bloom/Bloom.h lib/Bloom/Bloom.c
 
@@ -16,4 +19,4 @@ main: Bloom.o busqueda_binaria.o hashL2.o linear2.o main.c
 	g++ -o main main.c Bloom.o busqueda_binaria.o hashL2.o linear2.o
 
 clean:
-	rm *.o main
+	rm *.o main generadorfichero
