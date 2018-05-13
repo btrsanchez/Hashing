@@ -156,7 +156,7 @@ void Binaria(vector<int> dicc,vector<int> text)
     /**for (int i = 0; i < v2.size(); ++i) {
         cout << result[i];
     }**/
-    cout << "\n" << " Número de comparaciones que hace el algoritmp de ordenar: " << NumComp;
+    cout << "\n" << " Número de comparaciones que hace el algoritmo de ordenar: " << NumComp;
     cout << "\n Número de asignaciones auxliares que se hacen para ordenar el Diccionari: " << NumAuxAssig;
     cout << "\n Número de asignaciones que se hacen al Diccionari después de ordenar:' "<<  NumAssig;
     cout << "\n Número de comparaciones falladas con la entrada y el Diccionari: " << CompFallades;
