@@ -4,7 +4,7 @@
 #include "lib/Bloom/Bloom.h"
 #include "lib/HashOpen/linear2.h"
 #include "lib/HashSeparate/hashL2.h"
-//#include "lib/BusquedaBinaria/busqueda_binaria.h"
+#include "lib/BusquedaBinaria/busqueda_binaria.h"
 
 IV dic;     
 IV txt;
@@ -28,31 +28,36 @@ void ReadTxt() {
 }
 
 void Algorisme(string opcio) {
+  time_t timer;
+  float talg;
+  timer = clock();
 	if (opcio=="Bloom") {
 		unsigned int n, m, k;
 		BV bits;
 		n = txt.size();
-  		const double ln2=log(2)*log(2);
-  		m=ceil(abs(n*log(1.0/n)/ln2));
-  		k = (m/n)*log(2);
-  		bits=BV(m, 0);
-  		BloomFilter(bits,dic,txt,n,m,k);
+		const double ln2=log(2)*log(2);
+		m=ceil(abs(n*log(1.0/n)/ln2));
+		k = (m/n)*log(2);
+		bits=BV(m, 0);
+		BloomFilter(bits,dic,txt,n,m,k);
 	}
 	if (opcio=="HashOpen"){
-        cout<<"Choose Hash Table size, minimum is "<<dic.size()<<" (dic.txt size)"<<endl;
-        int Hs;
-        cin>>Hs;
+    cout<<"Choose Hash Table size, minimum is "<<dic.size()<<" (dic.txt size)"<<endl;
+    int Hs;
+    cin>>Hs;
 		if (Hs>= dic.size()) busca(dic,txt,Hs);
 	}
 	if (opcio=="HashSeparate"){
-        cout<<"Choose Hash Table size, minimum is "<<dic.size()<<" (dic.txt size)"<<endl;
-        int Hs;
-        cin>>Hs;
+    cout<<"Choose Hash Table size, minimum is "<<dic.size()<<" (dic.txt size)"<<endl;
+    int Hs;
+    cin>>Hs;
 		if (Hs>= dic.size()) buscaH(dic,txt,Hs);
 	}
 	if (opcio=="Binary"){
-		//buscaH(dic,txt);
+		Binaria(dic,txt);
 	}
+  talg = float(clock() - timer) / CLOCKS_PER_SEC;
+  cout << "Algorithm execution time: " << talg << " seconds\n";
 }
 
 int main(){

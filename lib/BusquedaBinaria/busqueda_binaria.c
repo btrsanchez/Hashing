@@ -1,4 +1,14 @@
-#include "busqueda_binaria.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <time.h>
+#include <ctime>
+#include <stdlib.h>
+#include <stdio.h>
+#include <chrono>
+
+using namespace std;
 
 int NumComp=0;
 int NumAssig=0;
@@ -6,32 +16,26 @@ int NumAuxAssig=0;
 int CompFallades=0;
 int CompBones=0;
 
-inline static bool comp(int a, int b) { return a < b; }
+vector<int> Diccionari;
 
-    //creadora que assigna un diccionari a una busqueda_binaria
-    void setDiccionari( vector<int>& Diccionario) {
-        Diccionari=Diccionario;
-    }
-    //retorn el private Diccionari d'una instancia busqueda_binaria
-    vector<int>  getDic() {
-        return Diccionari;
-    }
-    void merge(vector<int>& Diccionari, int l, int m, int r)
-    {
+static bool comp(int a, int b) { return a < b; }
+
+void merge(vector<int>& Diccionari, int l, int m, int r)
+{
     int i, j, k;
     int n1 = m - l + 1;
     int n2 =  r - m;
- 
+
     /* create temp arrays */
     int L[n1], R[n2];
- 
+
     /* Copy data to temp arrays L[] and R[] */
     for (i = 0; i < n1; i++) {
         L[i] = Diccionari[l + i];
         NumAuxAssig++;
-    }
+            }
         
-    for (j = 0; j < n2; j++){
+    for (j = 0; j < n2; j++) {
         
         R[j] = Diccionari[m + 1+ j];
         NumAuxAssig++;
@@ -53,8 +57,8 @@ inline static bool comp(int a, int b) { return a < b; }
         {
             NumComp++;
             Diccionari[k] = L[i];
-            NumAssig++;
-            i++;
+                NumAssig++;
+                i++;
         }
         else
         {
@@ -66,7 +70,7 @@ inline static bool comp(int a, int b) { return a < b; }
         NumComp++;
         k++;
     }
- 
+
     /* Copy the remaining elements of L[], if there
        are any */
     while (i < n1)
@@ -76,7 +80,7 @@ inline static bool comp(int a, int b) { return a < b; }
         i++;
         k++;
     }
- 
+
     /* Copy the remaining elements of R[], if there
        are any */
     while (j < n2)
@@ -86,14 +90,14 @@ inline static bool comp(int a, int b) { return a < b; }
         j++;
         k++;
     }
-    }
+}
     
-    /* l is for left index and r is right index of the
+void mergeSort(vector<int>& Diccionari, int l, int r)
+{
+                /* l is for left index and r is right index of the
    sub-array of arr to be sorted */
-    void mergeSort(vector<int>& arr, int l, int r)
+    if (l < r)
     {
-        if (l < r)
-        {
         // Same as (l+r)/2, but avoids overflow for
         // large l and h
         int m = l+(r-l)/2;
@@ -105,79 +109,57 @@ inline static bool comp(int a, int b) { return a < b; }
         merge(Diccionari, l, m, r);
         }
     }
-    /**void ordena(vector<int>& Diccionari) {
-        vector<int> v = Diccionari;
-        sort(v.begin(), v.end(), comp);
-        setDiccionari(v);
-    }**/
     
     inline bool ContieneNumero(int x) {
-        int i = 0;
-        int d = Diccionari.size() - 1;
+    int i = 0;
+    int d = Diccionari.size() - 1;
+
+    while (i <= d) {
+        int m = (i + d)/2;
+        
+        if  (x < Diccionari[m]){
+            CompFallades++;
+            d = m - 1;
+        } 
+        else if (x > Diccionari[m]){
+            CompFallades++;
+            i = m + 1;
+        } 
+        else    {
+            CompFallades++;
+            CompBones++;
+            return true;
+        }          
+    }
+    CompFallades++;
+    return false;
+}
     
-        while (i <= d) {
-            int m = (i + d)/2;
-            
-            if  (x < Diccionari[m]){
-                CompFallades++;
-                d = m - 1;
-            } 
-            else if (x > Diccionari[m]){
-                CompFallades++;
-                i = m + 1;
-            } 
-            else    {
-                CompFallades++;
-                CompBones++;
-                return true;
-            }          
-        }
-        CompFallades++;
-        return false;
-    }
-
-
-int main(int argc, char* argv[]) 
+void Binaria(vector<int> dicc,vector<int> text) 
 {
-        
-       /* chrono::steady_clock::time_point start= chrono::steady_clock::now();
-        int j=0;
-        for(int i=0; i<1000000; i++){
-            j++;
-        }
-        chrono::steady_clock::time_point end= chrono::steady_clock::now();
-        chrono::steady_clock::duration d= end-start;
-        cout << chrono::duration_cast<chrono::milliseconds>(d).count();*/
-        ifstream dic;
-        ifstream text;
-        int n;
-        vector<int> v1;
-        vector<int> v2;
-        dic.open("diccionari.txt");
-        while (dic >> n){
-        v1.push_back(n);
-        }
-        busqueda_binaria myBusquedaBinaria;
-        myBusquedaBinaria.setDiccionari(v1);
-        myBusquedaBinaria.mergeSort(v1,0,v1.size()-1);
-        text.open("entrada.txt");
-        while (text >> n){
-        v2.push_back(n);
-        }
-        
-        vector<bool> result(v2.size());
-        for (int i = 0; i < v2.size(); ++i) {
-            result[i] = myBusquedaBinaria.ContieneNumero(v2[i]);
-        }
-        for (int i = 0; i < v2.size(); ++i) {
-            cout << result[i];
-        }
-        cout << "\n" << " Nombre de Comparacions que fa el algoritme: " << NumComp;
-        cout << "\n Nombre d'assignacions auxliars que es fan per ordenar el Diccionari: " << NumAuxAssig;
-        cout << "\n Nombre d'assignacions que es fan al Diccionari després d'ordenar:' "<<  NumAssig;
-        cout << "\n Nombre de comparacions fallades amb la entrada i el Diccionari: " << CompFallades;
-        cout << "\n Nombre de comparacions encertades amb la entrada i el Diccionari: " << CompBones; 
+    int n;
+
+    //chrono::steady_clock::time_point start= chrono::steady_clock::now();
+    Diccionari = dicc;
+
+    mergeSort(Diccionari,0,Diccionari.size()-1);
+
+    vector<bool> result(text.size());
+    
+    for (int i = 0; i < text.size(); ++i) {
+        result[i] = ContieneNumero(text[i]);
     }
-
-
+                    
+    /*chrono::steady_clock::time_point end= chrono::steady_clock::now();
+    chrono::steady_clock::duration d= end-start;
+    cout << chrono::duration_cast<chrono::microseconds>(d).count()<< endl;*/
+    /**for (int i = 0; i < v2.size(); ++i) {
+        cout << result[i];
+    }**/
+    cout << "\n" << " Número de comparaciones que hace el algoritmp de ordenar: " << NumComp;
+    cout << "\n Número de asignaciones auxliares que se hacen para ordenar el Diccionari: " << NumAuxAssig;
+    cout << "\n Número de asignaciones que se hacen al Diccionari después de ordenar:' "<<  NumAssig;
+    cout << "\n Número de comparaciones falladas con la entrada y el Diccionari: " << CompFallades;
+    cout << "\n Número de comparaciones acertadas con la entrada y el Diccionari: " << CompBones << endl;
+}
 
