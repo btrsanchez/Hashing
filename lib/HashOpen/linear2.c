@@ -1,13 +1,13 @@
 #include "linear2.h"
 
-void busca(vector<int> dicc,vector<int> text){
+void busca(vector<int> dicc,vector<int> text, int size){
     int x,i,a,c=0,z=0,y=0,z2=0,y2=0;;
-    vector<int> v(2*dicc.size(),-1);
+    vector<int> v(size,-1);
     bool t;
     for(i=0;i<dicc.size();i++){
         t=true;
         x=dicc[i];
-        a= x % (v.size());
+        a= x % (size);
         while(t){
             if(v[a]==-1 or v[a]==x){
                 z2++;
@@ -25,7 +25,7 @@ void busca(vector<int> dicc,vector<int> text){
     for(i=0;i<text.size();i++){
         t=true;
         x=text[i];
-        a= x % (v.size());
+        a= x % (size);
         while(t){
             if(a==v.size() or v[a]==-1){
                 y2++;

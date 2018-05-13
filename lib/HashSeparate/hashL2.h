@@ -5,4 +5,4 @@
 
 using namespace std;
 
-void buscaH(vector<int> dicc,vector<int> text);
+void buscaH(vector<int> dicc,vector<int> text, int size);
