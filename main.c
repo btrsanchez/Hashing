@@ -39,10 +39,16 @@ void Algorisme(string opcio) {
   		BloomFilter(bits,dic,txt,n,m,k);
 	}
 	if (opcio=="HashOpen"){
-		busca(dic,txt);
+        cout<<"Choose Hash Table size, minimum is "<<dic.size()<<" (dic.txt size)"<<endl;
+        int Hs;
+        cin>>Hs;
+		if (Hs>= dic.size()) busca(dic,txt,Hs);
 	}
 	if (opcio=="HashSeparate"){
-		buscaH(dic,txt);
+        cout<<"Choose Hash Table size, minimum is "<<dic.size()<<" (dic.txt size)"<<endl;
+        int Hs;
+        cin>>Hs;
+		if (Hs>= dic.size()) buscaH(dic,txt,Hs);
 	}
 	if (opcio=="Binary"){
 		//buscaH(dic,txt);
