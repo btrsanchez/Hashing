@@ -30,7 +30,7 @@ void buscaH(vector<int> dicc,vector<int> text,int size){
         }
         if (it==table[a].end())y++;
     }
-    cout<<c<<" de les "<<text.size()<<" paraules apareixen al diccionari."<<endl;
-    cout<<z<<" accessos durant la creació"<<endl;
-    cout<<y+y2<<" accessos durant la búsqueda ("<<y<<" fracasos,"<<y2<<" éxits)"<< endl;
+    cout<<c<<" de las "<<text.size()<<" palabrass apararecen al diccionario."<<endl;
+    cout<<z<<" accesos durante la creación"<<endl;
+    cout<<y+y2<<" accesos durante la búsqueda("<<y<<" fracasos,"<<y2<<" éxitos)"<< endl;
 }
