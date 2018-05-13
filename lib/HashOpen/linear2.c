@@ -42,7 +42,7 @@ void busca(vector<int> dicc,vector<int> text, int size){
             }
         }
     }
-    cout<<c<<" de les "<<text.size()<<" paraules apareixen al diccionari."<<endl;
-    cout<<z+z2<<" accessos durant la creació("<<z<<" fracasos,"<<z2<<" éxits)"<< endl;
-    cout<<y+y2<<" accessos durant la búsqueda ("<<y<<" fracasos,"<<y2<<" éxits)"<< endl;
+    cout<<c<<" de las "<<text.size()<<" palabrass apararecen al diccionario."<<endl;
+    cout<<z+z2<<" accesos durante la creación("<<z<<" fracasos,"<<z2<<" éxitos)"<< endl;
+    cout<<y+y2<<" accesos durante la búsqueda("<<y<<" fracasos,"<<y2<<" éxitos)"<< endl;
 }
