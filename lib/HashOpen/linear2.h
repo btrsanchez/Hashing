@@ -3,5 +3,5 @@
 #include <set>
 using namespace std;
 
-void busca(vector<int> dicc,vector<int> text);
+void busca(vector<int> dicc,vector<int> text, int size);
     
