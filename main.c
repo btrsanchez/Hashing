@@ -29,15 +29,15 @@ void ReadTxt() {
 
 void Algorisme(string opcio) {
   time_t timer;
-  float talg;
+  double talg;
   timer = clock();
 	if (opcio=="Bloom") {
 		unsigned int n, m, k;
 		BV bits;
 		n = txt.size();
-		const double ln2=log(2)*log(2);
+		const double ln2=log(2.0)*log(2.0);
 		m=ceil(abs(n*log(1.0/n)/ln2));
-		k = (m/n)*log(2);
+		k = (m/n)*log(2.0);
 		bits=BV(m, 0);
 		BloomFilter(bits,dic,txt,n,m,k);
 	}
@@ -56,7 +56,7 @@ void Algorisme(string opcio) {
 	if (opcio=="Binary"){
 		Binaria(dic,txt);
 	}
-  talg = float(clock() - timer) / CLOCKS_PER_SEC;
+  talg = double(clock() - timer) / CLOCKS_PER_SEC;
   cout << "Algorithm execution time: " << talg << " seconds\n";
 }
 
@@ -64,7 +64,17 @@ int main(){
 	ReadDic();
 	ReadTxt();
 	string opcio;
-	cout << "Choose algorithm: Bloom/HashOpen/HashSeparate/Binary\n";
+	cout << "Choose algorithm: Bloom/HashOpen/HashSeparate/Binary/All\n";
 	cin >> opcio;
-	Algorisme(opcio);
+  if (opcio=="All") {
+    cout << "Bloom\n";
+    Algorisme("Bloom");
+    cout << "\nHashOpen\n";
+    Algorisme("HashOpen");
+    cout << "\nHashSeparate\n";
+    Algorisme("HashSeparate");
+    cout << "\nBinary";
+    Algorisme("Binary");
+  }
+	else Algorisme(opcio);
 }

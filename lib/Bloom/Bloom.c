@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Bloom.h"
+#include <math.h>
 
 using namespace std;
 int n, m, k;
@@ -13,15 +14,19 @@ void BloomFilter(BV bf, IV dic, IV txt, int siz, int bts, int funcs) {
 
   bits = bf;
 
-  for (int i = 0; i < n; ++i){
-    insert(txt[i]);
+  for (int i = 0; i < dic.size(); ++i){
+    insert(dic[i]);
   }
 
-  for (int i = 0; i < dic.size(); ++i) {
-    if (contains(dic[i])) ++c;
+  for (int i = 0; i < n; ++i) {
+    if (contains(txt[i])) ++c;
     //cout << dic[i] << ": " << contains(dic[i]) << endl;
   }
-  cout << c << " de les " << txt.size() << " paraules apareixen al diccionari.\n";
+  cout << c << " de las " << txt.size() << " palabras aparecen en el diccionario.\n";
+  float e = 2.71828182846;
+  float e1 = pow(e, -((float)k*(float)n/(float)m));
+  float posErr = pow(1 - e1, (float)k);
+  cout << "Posibilidad de falso positivo: " << posErr*100 << "%\n";
 }
 
 unsigned int MurmurHash2 (int key, int len, unsigned int seed ){
